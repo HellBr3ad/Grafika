@@ -14,7 +14,7 @@ new_screen_height = screen_height - 2 * border_width
 
 screen = pygame.display.set_mode((screen_width, screen_height))
 
-pygame.display.set_caption('Green Square with Centered Upside Down White Triangle')
+pygame.display.set_caption('Ksztalt nr 2')
 
 running = True
 while running:
