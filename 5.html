@@ -1,0 +1,64 @@
+// zadanie5
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hierarchical Modeling</title>
+    <style>
+        body { background-color: #f0f0f0; }
+        canvas { background-color: #ffffff; display: block; margin: auto; }
+    </style>
+</head>
+<body>
+<canvas id="canvas" width="800" height="800"></canvas>
+<script>
+    "use strict";
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    let angle1 = 0, angle2 = 0, angle3 = 0;
+
+    function drawPolygon(ctx, sides, radius) {
+        ctx.beginPath();
+        for (let i = 0; i < sides; i++) {
+            const x = radius * Math.cos(2 * Math.PI * i / sides);
+            const y = radius * Math.sin(2 * Math.PI * i / sides);
+            if (i === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+        }
+        ctx.closePath();
+        ctx.fill();
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.save();
+        ctx.translate(canvas.width / 2, canvas.height / 2);
+
+        ctx.rotate(angle1);
+        ctx.fillStyle = "red";
+        drawPolygon(ctx, 6, 50);
+
+        ctx.translate(100, 0);
+        ctx.rotate(angle2);
+        ctx.fillStyle = "green";
+        drawPolygon(ctx, 8, 30);
+
+        ctx.translate(100, 0);
+        ctx.rotate(angle3);
+        ctx.fillStyle = "blue";
+        drawPolygon(ctx, 10, 20);
+
+        ctx.restore();
+
+        angle1 += 0.01;
+        angle2 -= 0.02;
+        angle3 += 0.03;
+
+        requestAnimationFrame(draw);
+    }
+
+    draw();
+</script>
+</body>
+</html>
